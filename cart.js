@@ -1,18 +1,27 @@
-const cars = require('./data/cars');
+const cars = require("./data/cars");
 
 module.exports = {
-  cart: null,
-  total: null,
+  cart: [],
+  total: 0,
 
-  addToCart: function() {
-
+  addToCart: function(car) {
+    this.cart.push(car);
+    this.total += car.price;
+    return this.cart;
   },
 
-  removeFromCart: function() {
-
+  removeFromCart: function(index, price) {
+    if (this.cart.length) {
+      this.cart.splice(index, 1);
+      this.total -= price;
+    } else {
+      return "Cart array is empty";
+    }
+    return this.cart;
   },
-  
+
   checkout: function() {
-
+    this.cart = [];
+    this.total = 0;
   }
 };
